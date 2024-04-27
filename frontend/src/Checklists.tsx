@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "./components/ui/card";
 import { Checkbox } from "./components/ui/checkbox";
 import { Separator } from "./components/ui/separator";
+import { getChecklists } from "./actions";
+import {connect} from 'react-redux';
 
-const Checklists = () => {
+
+
+const Checklists = (props : any) => {
+
+  useEffect(() => {
+    props.getChecklists();
+  }, []);
+
+  console.log(props);
+  console.log(props.checklists);
   return (
     <>
       <div className="flex w-3/4 h-screen justify-center items-center  m-auto">
@@ -52,4 +63,11 @@ const Checklists = () => {
   );
 };
 
-export default Checklists;
+
+const mapStateToProps = (state: any) => {
+  return {
+    checklists: state.checklists
+  }
+}
+
+export default connect(mapStateToProps, {getChecklists})(Checklists);
