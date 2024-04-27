@@ -1,20 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NewCheckList from './NewCheckList.tsx';
-import Checklists from './Checklists.tsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App.tsx";
+import "./index.css";
+import reducer from "./reducers";
+import { Provider } from "react-redux";
 
+import {legacy_createStore as createStore} from 'redux'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import thunk from 'redux-thunk';
+import { applyMiddleware } from 'redux';
 
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/checkLists" element={<Checklists />} />
-      <Route path="/newCheckList" element={<NewCheckList />} />
-    </Routes>
-  </BrowserRouter>
+const store = createStore(reducer , applyMiddleware(thunk)); 
 
-)
+ReactDOM.render(
+  <Provider store={store}>    
+    <App/>
+  </Provider>
+    ,
+  document.getElementById("root")
+);
