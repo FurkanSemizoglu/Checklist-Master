@@ -18,7 +18,7 @@ app.get("/" , (req,res) => {
 
 // Routes
 
-app.use("/api/newItems",newItemsRoutes);
+app.use("/api",newItemsRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URL, {

@@ -9,7 +9,7 @@ const newChecklistItemsSchema = new mongoose.Schema({
         type: String,
         required: true
     }]
-});
+},{timestamps: true });
 
 const ChecklistItem = mongoose.model('ChecklistItems', newChecklistItemsSchema);
 
