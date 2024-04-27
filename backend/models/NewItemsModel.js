@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const blogSchema = new mongoose.Schema({
+const newChecklistItemsSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -11,8 +11,8 @@ const blogSchema = new mongoose.Schema({
     }]
 });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const ChecklistItem = mongoose.model('ChecklistItems', newChecklistItemsSchema);
 
-module.exports = Blog;
+export  {ChecklistItem};
 
 

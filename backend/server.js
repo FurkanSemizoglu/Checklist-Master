@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import newItemsRoutes from "./routes/newItemsRoutes.js";
 
 
 dotenv.config();
@@ -15,6 +15,10 @@ app.use(express.json());
 app.get("/" , (req,res) => {
     res.send("Server is running")
 })
+
+// Routes
+
+app.use("/api/newItems",newItemsRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URL, {
