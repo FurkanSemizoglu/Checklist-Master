@@ -5,6 +5,7 @@ import { Checkbox } from "./components/ui/checkbox";
 import { Separator } from "./components/ui/separator";
 import { getChecklists } from "./actions";
 import {connect} from 'react-redux';
+import LeftBarCard from "./MyComponents/LeftBarCard";
 
 
 
@@ -12,16 +13,36 @@ const Checklists = (props : any) => {
 
   useEffect(() => {
     props.getChecklists();
+    
+ 
   }, []);
 
-  console.log(props);
-  console.log(props.checklists);
+  console.log("props "  , props);
+  console.log("checklistes "  , props.checklists);
   return (
     <>
       <div className="flex w-3/4 h-screen justify-center items-center  m-auto">
         <div className="flex justify-between w-full h-3/4 ">
           <ScrollArea className="w-1/4 h-full rounded-md border p-4">
-            <div className="mt-3 hover:cursor-pointer">
+
+
+            {props.checklists.map((checklist: any ) => {
+              
+
+              return (
+                  LeftBarCard({checklist})
+              )
+
+           
+             
+              
+            
+            }
+
+            )}
+       
+            
+          {/*    <div className="mt-3 hover:cursor-pointer">
               <span> Piknik </span>
               <Separator className="mt-2" />
             </div>
@@ -36,7 +57,7 @@ const Checklists = (props : any) => {
             <div className="mt-3">
               <span> Piknik </span>
               <Separator className="mt-2" />
-            </div>
+            </div>  */}
           </ScrollArea>
 
           <Card className="w-full  p-3 ">

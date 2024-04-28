@@ -6,6 +6,7 @@ export const getChecklists = () => (dispatch: Dispatch<any>) => {
   axios
     .get("http://localhost:5050/api/getItems")
     .then((response) => {
+      console.log("response.data", response.data);
       dispatch({ type: "GET_CHECKLISTS_SUCCESS", payload: response.data });
     })
     .catch((error) => {
