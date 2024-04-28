@@ -32,7 +32,7 @@ const handleSelected = (onClick : ()=> void) => {
     return (
         <div  onClick={() => {
             handleSelected(onClick)}} 
-                className={`mt-3 ${isSelected ? 'translate-x-3 transition-transform hover:cursor-pointer' : ' hover:cursor-pointer'}`}
+                className={`mt-3 ${isSelected ? 'translate-x-3 transition-transform hover:cursor-pointer duration-500' : ' hover:cursor-pointer'}`}
         >
             <span>{checklist.title}</span>
             <Separator className="mt-2" />
