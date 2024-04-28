@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "./components/ui/card";
 import { Checkbox } from "./components/ui/checkbox";
@@ -17,6 +17,12 @@ const Checklists = (props : any) => {
  
   }, []);
 
+  const [enable, setEnable] = useState(false);
+
+  const enableClick = () => {
+    setEnable(!enable);
+  }
+
   console.log("props "  , props);
   console.log("checklistes "  , props.checklists);
   return (
@@ -26,45 +32,32 @@ const Checklists = (props : any) => {
           <ScrollArea className="w-1/4 h-full rounded-md border p-4">
 
 
-            {props.checklists.map((checklist: any ) => {
-              
+            {props.checklists.map(( checklist: any ) => {             
 
               return (
-                  LeftBarCard({checklist})
+                //  {/* <LeftBarCard  checklist = {checklist}  onClick={enableClick}/> */}
+                  <LeftBarCard key={checklist._id} checklist = {checklist}  onClick={enableClick}/>
               )
-
-           
-             
-              
-            
             }
 
             )}
-       
-            
-          {/*    <div className="mt-3 hover:cursor-pointer">
-              <span> Piknik </span>
-              <Separator className="mt-2" />
-            </div>
-            <div className="mt-3">
-              <span> Piknik </span>
-              <Separator className="mt-2" />
-            </div>
-            <div className="mt-3">
-              <span> Piknik </span>
-              <Separator className="mt-2" />
-            </div>
-            <div className="mt-3">
-              <span> Piknik </span>
-              <Separator className="mt-2" />
-            </div>  */}
+
+
           </ScrollArea>
 
           <Card className="w-full  p-3 ">
 
-            <div className="flex h-full justify-center items-center">
+            {
+              enable ? null : (
+                <div className="flex h-full justify-center items-center">
+                  <span className="flex justify-center items-center text-3xl">&#9786; Please pick a list to check your items &#9786;</span>
+                </div>
+              )
+            }
+
+         {/*    <div className="flex h-full justify-center items-center">
                <span className="flex justify-center items-center text-3xl">&#9786; Please pick  a list to check your items &#9786;</span> 
-            </div>
+            </div> */}
 
            {/*  <div className="items-top flex space-x-2">
               <Checkbox id="terms1" />
