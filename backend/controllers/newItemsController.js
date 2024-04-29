@@ -30,7 +30,7 @@ const addNewItems = (req, res, next) => {
 
 const getSingleItem = (req, res, next) => {
     try {
-        ChecklistItem.findById(req.params.id)
+        ChecklistItem.findById(req.body._id || req.params.id    )
             .then(item => res.json(item))
             .catch(err => res.status(400).json('Error: ' + err));
     } catch (error) {

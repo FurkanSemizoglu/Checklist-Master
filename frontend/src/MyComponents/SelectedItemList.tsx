@@ -1,14 +1,25 @@
+import { getSingleChecklist } from "@/actions";
 import { Checkbox } from "@/components/ui/checkbox";
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+
 
 interface SelectedItemListProps {
   activeId: String | null;
+ // props : any;  
+ getSingleChecklist: () => void;
 }
 
 
-const SelectedItemList : React.FC<SelectedItemListProps> = ({activeId}) => {
+const SelectedItemList : React.FC<SelectedItemListProps> = ({activeId , getSingleChecklist}) => {
 
-  
+  useEffect(() => {
+    console.log("active id ", activeId);
+
+    getSingleChecklist();
+
+
+  }, [activeId]);
 
 
   return (
@@ -73,4 +84,15 @@ const SelectedItemList : React.FC<SelectedItemListProps> = ({activeId}) => {
   );
 };
 
-export default SelectedItemList;
+const mapStateToProps = (state: any) => {
+  return {
+    checklists: state.checklists,
+  };
+};  
+
+
+const mapDispatchToProps = {
+  getSingleChecklist,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedItemList);
