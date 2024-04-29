@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { Separator } from "../components/ui/separator";
 
 interface Checklist {
-    id : string;
+    _id : string;
     title: string;
   }
 
   
 interface LeftBarCardProps {
     checklist: Checklist;
-    onClick: () => void;
- //   key : Key;
+    onClick: (id: String ) => void;
+   // key : Key;
+    activeId : String | null;
 }  
 
 interface Key{
@@ -19,20 +20,27 @@ interface Key{
 
 
 
-const LeftBarCard : React.FC<LeftBarCardProps>= ({ checklist , onClick}) => {
+const LeftBarCard : React.FC<LeftBarCardProps>=  ({ checklist , onClick  , activeId}) => {
 
     const [isSelected, setSelected] = useState(false);
 
-const handleSelected = (onClick : ()=> void) => {
+
+    console.log("active id " , activeId);
+    console.log("checklist id " , checklist._id );
+
+/* const handleSelected = (onClick : ()=> void) => {
 
      onClick();
      setSelected(!isSelected);
-}
+} */
+const handleSelected = () => {
+    onClick(checklist._id);  
+    setSelected(!isSelected); 
+};
 
     return (
-        <div  onClick={() => {
-            handleSelected(onClick)}} 
-                className={`mt-3 ${isSelected ? 'translate-x-3 transition-transform hover:cursor-pointer duration-500' : ' hover:cursor-pointer'}`}
+        <div  onClick={handleSelected} 
+                className={`mt-3 ${(activeId === checklist._id ) ? 'translate-x-3 transition-transform hover:cursor-pointer duration-500' : ' hover:cursor-pointer'}`}
         >
             <span>{checklist.title}</span>
             <Separator className="mt-2" />

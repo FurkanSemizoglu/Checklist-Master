@@ -15,9 +15,15 @@ const Checklists = (props: any) => {
 
   const [enable, setEnable] = useState(false);
 
+  const [activeId, setActiveId] = useState<String | null> (null);
   const enableClick = () => {
-    setEnable(!enable);
+    setEnable(true);
   };
+
+  const handleSelected = (id: String) => {
+    setActiveId(id);
+    setEnable(true);
+  }
 
   console.log("props ", props);
   console.log("checklistes ", props.checklists);
@@ -27,12 +33,14 @@ const Checklists = (props: any) => {
         <div className="flex justify-between w-full h-3/4 ">
           <ScrollArea className="w-1/4 h-full rounded-md border p-4">
             {props.checklists.map((checklist: any) => {
+
+
               return (
-                //  {/* <LeftBarCard  checklist = {checklist}  onClick={enableClick}/> */}
                 <LeftBarCard
                   key={checklist._id}
                   checklist={checklist}
-                  onClick={enableClick}
+                  onClick={() => handleSelected(checklist._id)}
+                  activeId={activeId}
                 />
               );
             })}
@@ -40,7 +48,11 @@ const Checklists = (props: any) => {
 
           <Card className="w-full  p-3 ">
             {enable ? (
-              <SelectedItemList />
+
+              <SelectedItemList
+                activeId={activeId}
+              
+              />
             ) : (
               <div className="flex h-full justify-center items-center">
                 <span className="flex justify-center items-center text-3xl">
