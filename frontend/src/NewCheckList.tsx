@@ -33,12 +33,13 @@ const NewCheckList = (props: any) => {
       title,
       inputFields
     };
-
+  
     console.log(dataToSend.inputFields);
     console.log(dataToSend.title);
-
+  
     props.addChecklist(dataToSend);
   };
+  
 
   return (
     <div className='flex flex-col justify-center items-center w-1/2 m-auto p-3 my-5'>
