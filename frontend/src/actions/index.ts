@@ -30,10 +30,11 @@ export const getSingleChecklist = (id: String) => (dispatch : Dispatch<any>) => 
 } 
 
 
-export const addChecklist = (checklist: any) => (dispatch: Dispatch<any>) => {
+export const addChecklist = (data : any) => (dispatch: Dispatch<any>) => {
   axios
-    .post("http://localhost:5050/api/addItem", checklist)
+    .post("http://localhost:5050/api/addItem",data)
     .then((response) => {
+      console.log(response.data);
       dispatch({ type: "ADD_CHECKLIST_SUCCESS", payload: response.data });
     })
     .catch((error) => {
