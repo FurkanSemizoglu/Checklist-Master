@@ -6,6 +6,8 @@ interface Action {
 const INITIAL_STATE = {
   checklists: [],
   message: "",
+  status: "idle",
+
 };
 
 const reducer = (state = INITIAL_STATE, action: Action) => {
@@ -21,8 +23,6 @@ const reducer = (state = INITIAL_STATE, action: Action) => {
         checklists: action.payload,
       };
     case "GET_CHECKLISTS_ERROR":
-      console.log("action payloadd  fail", action.payload);
-      console.log("action STATE İNİTİAL ", state);
       return {
         ...state,
         message: action.payload,
@@ -39,6 +39,20 @@ const reducer = (state = INITIAL_STATE, action: Action) => {
         ...state,
         message: action.payload,
       };
+    case "ADD_CHECKLIST_SUCCESS":
+      console.log("action payload for add checklist", action.payload)
+      window.location.href = "/";
+      return {
+        ...state,
+        message: action.payload,
+        status: "success",
+      };
+    case "ADD_CHECKLIST_ERROR":
+      return {
+        ...state,
+        message: action.payload,
+      };
+
 
     default:
       console.log("action payloadd  fail", action.payload);

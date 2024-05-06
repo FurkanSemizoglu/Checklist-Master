@@ -25,13 +25,17 @@ const getNewItems = (req, res, next) => {
     
             // Saving the new ChecklistItem to the database
             newItem.save()
-                .then(() => res.json('New item added!')) // Sending a success message back to the front-end
+                .then(() => res.json({
+                   status: 'Success',
+                   message : 'New item added!'
+                })) // Sending a success message back to the front-end
                 .catch(err => res.status(400).json('Error: ' + err)); // Sending an error message if saving fails
         } catch (error) {
             // Catching any potential errors and sending a 500 status code with an error message
             res.status(500).json({ message: error.message });
         }
     }
+
 
 const getSingleItem = (req, res, next) => {
     try {

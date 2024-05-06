@@ -11,6 +11,7 @@ interface LeftBarCardProps {
     checklist: Checklist;
     onClick: (id: String ) => void;
    // key : Key;
+    active: boolean;
     activeId : String | null;
 }  
 

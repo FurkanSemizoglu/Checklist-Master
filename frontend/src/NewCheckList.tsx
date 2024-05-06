@@ -36,7 +36,7 @@ const NewCheckList = (props: any) => {
   
     console.log(dataToSend.inputFields);
     console.log(dataToSend.title);
-  
+    
     props.addChecklist(dataToSend);
   };
   
