@@ -19,7 +19,11 @@ export const getChecklists = () => (dispatch: Dispatch<any>) => {
 export const getSingleChecklist = (id: String) => (dispatch : Dispatch<any>) => {
 
   axios
-    .get(`http://localhost:5050/api/getSingleItem`, { params: { id: id } })
+    .get(`http://localhost:5050/api/getSingleItem?id=${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then((response) => {
       console.log("response.data", response.data);
       dispatch({ type:"GET_SINGLE_CHECKLIST_SUCCESS", payload: response.data });

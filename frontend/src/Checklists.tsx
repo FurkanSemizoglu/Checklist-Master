@@ -3,7 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "./components/ui/card";
 import { Checkbox } from "./components/ui/checkbox";
 import { Separator } from "./components/ui/separator";
-import { getChecklists } from "./actions";
+import { getChecklists, getSingleChecklist } from "./actions";
 import { connect } from "react-redux";
 import LeftBarCard from "./MyComponents/LeftBarCard";
 import SelectedItemList from "./MyComponents/SelectedItemList";
@@ -14,9 +14,18 @@ interface ChecklistItem {
   // Diğer öğe özellikleri
 }
 
+interface singleChecklistItems {
+  _id: string;
+  title: string;
+  items: string[];
+  // Diğer öğe özellikleri
+}
+
 interface ChecklistsProps {
   checklists: ChecklistItem[];
+  checklistItems: singleChecklistItems;
   getChecklists: () => void;
+  getSingleChecklist: (id: string) => void;
 }
 
 const Checklists: React.FC<ChecklistsProps> = (props) => {
@@ -24,8 +33,13 @@ const Checklists: React.FC<ChecklistsProps> = (props) => {
   const [enable, setEnable] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
+
+  const [checklists, setChecklists] = useState<ChecklistItem[]>([]);
+ 
   useEffect(() => {
     props.getChecklists();
+    setChecklists(props.checklists);
+    console.log("first checklists", checklists);  
   }, []);
 
   const handleSelected = (id: string) => {
@@ -39,7 +53,12 @@ const Checklists: React.FC<ChecklistsProps> = (props) => {
     }
     setActiveId(id);
     setEnable(true);
+    console.log("props.checklisItemsss" ,  props.checklistItems) 
+    props.getSingleChecklist(id); // Fixed the method name here
+    console.log("props.checklisItemsss" ,  props.checklistItems) 
   };
+
+  console.log(checklists , "Checklists")
 
   return (
     <>
@@ -80,4 +99,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps, { getChecklists })(Checklists);
+export default connect(mapStateToProps, { getChecklists ,getSingleChecklist })(Checklists);

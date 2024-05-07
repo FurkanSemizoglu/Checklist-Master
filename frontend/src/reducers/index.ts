@@ -5,6 +5,7 @@ interface Action {
 
 const INITIAL_STATE = {
   checklists: [],
+  checklistItems: [],
   message: "",
   status: "idle",
 
@@ -28,10 +29,10 @@ const reducer = (state = INITIAL_STATE, action: Action) => {
         message: action.payload,
       };
     case "GET_SINGLE_CHECKLIST_SUCCESS":
-
+      console.log("checklistitemsssssssssssssssssss", action.payload);
       return {
         ...state,
-        checklists: action.payload,
+        checklistItems: action.payload,
       };
     case "GET_SINGLE_CHECKLIST_ERROR":
 
